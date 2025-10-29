@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nautica Sport | Colección Premium</title>
+  <meta name="description" content="Colección de ropa deportiva y náutica con diseño moderno. Tienda modelo para presentación empresarial.">
+  <style>
+    :root {
+      --bg: #f6f8fa;
+      --card: #fff;
+      --accent: #002d62;
+      --muted: #555;
+      --highlight: #d62828;
+    }
+    body {
+      font-family: 'Poppins', system-ui, Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #111;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--accent); }
+    .hero {
+      background: linear-gradient(90deg, rgba(0,45,98,0.1), transparent);
+      border-radius: 14px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .hero h1 {
+      font-size: 36px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .hero p { color: var(--muted); font-size: 16px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+    .info {
+      padding: 16px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--accent);
+    }
+    .price {
+      font-weight: 700;
+      color: var(--highlight);
+      margin: 6px 0;
+    }
+    .desc { color: var(--muted); font-size: 14px; }
+    .buy {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .buy:hover { background: var(--highlight); }
+
+    .about {
+      margin-top: 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 40px 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">NAUTICA SPORT</div>
+      <nav>
+        <a href="#coleccion">Colección</a>
+        <a href="#about">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Colección Náutica 2025</h1>
+      <p>Inspirada en el espíritu del mar y la elegancia deportiva. Diseño argentino, producción bajo demanda y envío global.</p>
+    </section>
+
+    <section id="coleccion" class="grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5" alt="Remera Brisa Marina">
+        <div class="info">
+          <h3 class="title">Remera Brisa Marina</h3>
+          <div class="price">USD 24.90</div>
+          <p class="desc">Corte clásico, algodón orgánico. Detalle frontal bordado estilo regata.</p>
+          <a href="#" class="buy">Comprar</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab" alt="Polo Regata">
+        <div class="info">
+          <h3 class="title">Polo Regata</h3>
+          <div class="price">USD 29.90</div>
+          <p class="desc">Piqué premium, cuello de dos botones y franja lateral azul marino.</p>
+          <a href="#" class="buy">Comprar</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1617137968427-85924c800a9e" alt="Buzo Compás">
+        <div class="info">
+          <h3 class="title">Buzo Compás</h3>
+          <div class="price">USD 39.90</div>
+          <p class="desc">Buzo con capucha y estampa minimalista de compás marinero.</p>
+          <a href="#" class="buy">Comprar</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1579338559194-a162d19bf842" alt="Tote Bag Norte">
+        <div class="info">
+          <h3 class="title">Tote Bag Norte</h3>
+          <div class="price">USD 14.90</div>
+          <p class="desc">Bolso de lona resistente con logo tipográfico. Ideal para playa o ciudad.</p>
+          <a href="#" class="buy">Comprar</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="about" class="about">
+      <h2>Sobre el proyecto</h2>
+      <p>Este modelo de tienda fue desarrollado para mostrar un sistema de venta sin stock (Print-on-Demand). La producción y envío se realizan bajo pedido, reduciendo costos y desperdicio textil. Ideal para marcas emergentes o presentaciones empresariales.</p>
+      <ul>
+        <li>Diseños personalizables</li>
+        <li>Hosting gratuito (GitHub Pages)</li>
+        <li>Integración con Printful o PayPal</li>
+        <li>Escalable sin inversión inicial</li>
+      </ul>
+    </section>
+
+    <section id="contacto" class="about">
+      <h2>Contacto</h2>
+      <p>Para más información o demostraciones de integración con proveedores, escribinos a:</p>
+      <p><strong>ulisalimjul@gmail.com</strong></p>
+    </section>
+
+    <footer>
+      <p>© 2025 Nautica Sport Demo — Proyecto de presentación. Todos los diseños son conceptuales.</p>
+    </footer>
+  </div>
+</body>
+</html>

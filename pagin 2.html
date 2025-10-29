@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nautica — Demo Tienda (Remeras / Buzos / Pantalones)</title>
+  <meta name="description" content="Tienda demo estilo náutico con carrito simulado. Ideal para presentaciones empresariales." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f8fb; --card:#ffffff; --accent:#063a6f; --accent-2:#0077b6; --muted:#6b7280; --danger:#d62828;
+      --glass: rgba(255,255,255,0.7);
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Poppins',system-ui,Arial,sans-serif;margin:0;background:linear-gradient(180deg,#eef6ff 0%,var(--bg) 100%);color:#0f172a;-webkit-font-smoothing:antialiased}
+    .container{max-width:1200px;margin:28px auto;padding:0 20px}
+
+/* HEADER */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.6px}
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .actions{display:flex;align-items:center;gap:12px}
+    .icon-btn{background:var(--card);border-radius:10px;padding:8px 10px;box-shadow:0 6px 18px rgba(8,15,31,0.06);cursor:pointer}
+
+/* HERO */
+    .hero{margin-top:18px;background:linear-gradient(90deg,rgba(6,58,111,0.06),transparent);border-radius:14px;padding:28px;display:flex;gap:22px;align-items:center}
+    .hero-left{flex:1}
+    .hero h2{margin:0;color:var(--accent);font-size:28px;font-family:'Montserrat',sans-serif}
+    .hero p{color:var(--muted);margin-top:8px}
+    .cta{display:inline-block;margin-top:12px;padding:10px 16px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none}
+    .hero-right{width:240px}
+    .hero-right img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(6,58,111,0.08);object-fit:cover}
+
+/* LAYOUT */
+    .main{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:22px}
+
+/* SIDEBAR */
+    .sidebar{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(8,15,31,0.04)}
+    .sidebar h3{margin:0 0 12px 0;color:var(--accent)}
+    .filter{display:flex;flex-direction:column;gap:8px}
+    .category{padding:8px 10px;border-radius:8px;background:linear-gradient(180deg,var(--glass),#fff);cursor:pointer}
+    .search{display:flex;margin-bottom:10px}
+    .search input{flex:1;padding:8px;border-radius:8px;border:1px solid #e6eef9}
+
+/* SECTION TITLES */
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin:14px 0}
+    .section-title h3{margin:0;color:var(--accent);font-family:'Montserrat',sans-serif}
+
+/* PRODUCT GRID */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+    .product{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 26px rgba(11,20,40,0.06);transition:transform .22s}
+    .product:hover{transform:translateY(-6px)}
+    .product img{width:100%;height:200px;object-fit:cover}
+    .pinfo{padding:12px}
+    .p-title{font-weight:700;color:var(--accent);font-size:15px;margin:0}
+    .p-price{color:var(--accent-2);font-weight:800;margin-top:8px}
+    .p-actions{display:flex;gap:8px;margin-top:12px}
+    .btn{padding:8px 10px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:600}
+    .btn-outline{border:1px solid #e6eef9;background:transparent;color:var(--accent)}
+    .btn-primary{background:var(--accent-2);color:white}
+
+/* CART */
+    .cart-toggle{position:fixed;right:22px;bottom:22px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;padding:12px 14px;border-radius:999px;box-shadow:0 14px 40px rgba(6,58,111,0.18);cursor:pointer;z-index:90}
+    .cart{position:fixed;right:0;top:0;height:100vh;width:380px;background:#fff;box-shadow:-20px 0 40px rgba(6,58,111,0.08);transform:translateX(100%);transition:transform .28s;z-index:100;display:flex;flex-direction:column}
+    .cart.open{transform:translateX(0)}
+    .cart .header{display:flex;justify-content:space-between;align-items:center;padding:18px;border-bottom:1px solid #f1f5f9}
+    .cart .items{flex:1;overflow:auto;padding:12px}
+    .cart .footer{padding:14px;border-top:1px solid #f1f5f9}
+    .cart-item{display:flex;gap:12px;padding:10px;border-radius:10px;background:#fbfdff;margin-bottom:10px}
+    .cart-item img{width:70px;height:70px;object-fit:cover;border-radius:8px}
+    .qty{display:flex;gap:6px;align-items:center}
+    .muted{color:var(--muted)}
+
+/* RESPONSIVE */
+    @media (max-width:900px){.main{grid-template-columns:1fr} .sidebar{order:2}}
+    @media (max-width:600px){.hero{flex-direction:column;align-items:flex-start}.hero-right{width:100%}.cart{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div>
+          <h1>Nautica — Tienda Demo</h1>
+          <div class="muted">Remeras · Buzos · Pantalones — Presentación</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#remeras">Remeras</a>
+        <a href="#buzos">Buzos</a>
+        <a href="#pantalones">Pantalones</a>
+        <a href="#about">Nosotros</a>
+      </nav>
+
+      <div class="actions">
+        <div class="icon-btn" title="Cuenta">Iniciar</div>
+        <div class="icon-btn" id="cartCountBtn">Carrito (<span id="cart-count">0</span>)</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Colección Náutica — Edición Presentación</h2>
+        <p>Modelos conceptuales para presentar a clientes o inversores. Producción por demanda y look inspirado en la marina clásica.</p>
+        <a class="cta" href="#remeras">Ver remeras</a>
+      </div>
+      <div class="hero-right">
+        <img src="https://images.unsplash.com/photo-1503342452485-86a0b2b1c9f6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ee2f4862f1b7c3a8" alt="hero">
+      </div>
+    </section>
+
+    <div class="main">
+      <aside class="sidebar">
+        <h3>Categorías</h3>
+        <div class="filter">
+          <div class="search"><input id="searchBox" placeholder="Buscar producto..." /></div>
+          <div class="category" data-cat="all">Todas</div>
+          <div class="category" data-cat="remeras">Remeras</div>
+          <div class="category" data-cat="buzos">Buzos</div>
+          <div class="category" data-cat="pantalones">Pantalones</div>
+        </div>
+
+        <h3 style="margin-top:18px">Información</h3>
+        <p class="muted">Demo con carrito simulado (local). Los botones pueden integrarse con Printful o links de pago reales para producción bajo demanda.</p>
+      </aside>
+
+      <main>
+        <!-- REMERAS -->
+        <div id="remeras" class="section-title"><h3>Remeras</h3></div>
+        <section class="grid" id="grid-remeras"></section>
+
+        <!-- BUZOS -->
+        <div id="buzos" class="section-title"><h3>Buzos</h3></div>
+        <section class="grid" id="grid-buzos"></section>
+
+        <!-- PANTALONES -->
+        <div id="pantalones" class="section-title"><h3>Pantalones</h3></div>
+        <section class="grid" id="grid-pantalones"></section>
+
+        <section id="about" style="margin-top:22px;padding:18px;background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(8,15,31,0.04)">
+          <h3>Sobre el proyecto</h3>
+          <p class="muted">Tienda demostrativa que muestra catálogo, filtrado por categoría, búsqueda y carrito persistente. Perfecta para presentaciones o para convertirse en MVP real integrando Printful/Stripe.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- CART TOGGLE -->
+  <div class="cart-toggle" id="openCart">Ver carrito 🛒 (<span id="float-count">0</span>)</div>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart" id="cartPanel" aria-hidden="true">
+    <div class="header">
+      <strong>Tu carrito</strong>
+      <button id="closeCart" class="icon-btn">Cerrar</button>
+    </div>
+    <div class="items" id="cartItems">
+      <!-- items -->
+    </div>
+    <div class="footer">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="muted">Subtotal</div><div id="cartSubtotal">USD 0.00</div></div>
+      <div style="display:flex;gap:8px">
+        <button id="checkoutBtn" class="btn btn-primary" style="flex:1">Simular checkout</button>
+        <button id="clearCart" class="btn btn-outline">Vaciar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ===== Productos (solo imagen, nombre, precio, botón agregar) ===== */
+    const PRODUCTS = [
+      // REMERAS (varias)
+      {id:101, title:'Remera Brisa Marina', price:24.9, category:'remeras', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1'},
+      {id:102, title:'Remera Remos', price:22.9, category:'remeras', img:'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6'},
+      {id:103, title:'Remera Marinero', price:25.0, category:'remeras', img:'https://images.unsplash.com/photo-1520975681919-9fdc6d4e8d32?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=11'},
+      {id:104, title:'Remera Rayas Clásicas', price:23.5, category:'remeras', img:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4'},
+      {id:105, title:'Remera Norte', price:21.9, category:'remeras', img:'https://images.unsplash.com/photo-1519741488335-5d3b9a3b9c0f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9'},
+      {id:106, title:'Remera Puerto', price:20.5, category:'remeras', img:'https://images.unsplash.com/photo-1503342452485-86a0b2b1c9f6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ee2f4862f1b7c3a8'},
+      {id:107, title:'Remera Club', price:26.0, category:'remeras', img:'https://images.unsplash.com/photo-1562158070-1a7ba27b0d7e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b6b6a9a8c1d'},
+      {id:108, title:'Remera Regata', price:24.0, category:'remeras', img:'https://images.unsplash.com/photo-1520975926397-7b22d6c7b5a9?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7'},
+
+      // BUZOS
+      {id:201, title:'Buzo Compás', price:39.9, category:'buzos', img:'https://images.unsplash.com/photo-1617137968427-85924c800a9e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3'},
+      {id:202, title:'Buzo Timón', price:41.0, category:'buzos', img:'https://images.unsplash.com/photo-1519741496637-5f6f4e1e4a3b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=8'},
+      {id:203, title:'Buzo Capitan', price:45.0, category:'buzos', img:'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4'},
+      {id:204, title:'Buzo Regata Tech', price:48.5, category:'buzos', img:'https://images.unsplash.com/photo-1589254062143-7fca9b0b4f28?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5'},
+      {id:205, title:'Buzo Nautic Premium', price:52.0, category:'buzos', img:'https://images.unsplash.com/photo-1519741488335-5d3b9a3b9c0f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9'},
+      {id:206, title:'Buzo Marina', price:37.0, category:'buzos', img:'https://images.unsplash.com/photo-1461009318166-1c7f0b6b8a80?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=6'},
+
+      // PANTALONES
+      {id:301, title:'Pantalón Chino Marina', price:44.0, category:'pantalones', img:'https://images.unsplash.com/photo-1526178610040-95ff7da7d3aa?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1'},
+      {id:302, title:'Pantalón Nautico Tech', price:49.5, category:'pantalones', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2'},
+      {id:303, title:'Jogger Puerto', price:36.9, category:'pantalones', img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3'},
+      {id:304, title:'Pantalón Corto Regata', price:29.0, category:'pantalones', img:'https://images.unsplash.com/photo-1503342452485-86a0b2b1c9f6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=4'},
+      {id:305, title:'Short Puerto', price:27.5, category:'pantalones', img:'https://images.unsplash.com/photo-1520975926397-7b22d6c7b5a9?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5'}
+    ];
+
+    /* DOM references */
+    const gridRemeras = document.getElementById('grid-remeras');
+    const gridBuzos = document.getElementById('grid-buzos');
+    const gridPantalones = document.getElementById('grid-pantalones');
+    const categories = document.querySelectorAll('.category');
+    const searchBox = document.getElementById('searchBox');
+    const cartPanel = document.getElementById('cartPanel');
+    const openCart = document.getElementById('openCart');
+    const closeCart = document.getElementById('closeCart');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cart-count');
+    const floatCount = document.getElementById('float-count');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const clearCartBtn = document.getElementById('clearCart');
+
+    /* Cart in localStorage */
+    let CART = JSON.parse(localStorage.getItem('ns_cart') || '[]');
+    function saveCart(){ localStorage.setItem('ns_cart', JSON.stringify(CART)); renderCart(); }
+
+    function addToCartById(id, qty=1){
+      const product = PRODUCTS.find(p=>p.id===id);
+      if(!product) return;
+      const found = CART.find(i=>i.id===product.id);
+      if(found) found.qty += qty;
+      else CART.push({id:product.id, title:product.title, price:product.price, img:product.img, qty});
+      saveCart();
+      openCartPanel();
+    }
+
+    function removeFromCart(index){ CART.splice(index,1); saveCart(); }
+    function changeQty(index, delta){ CART[index].qty = Math.max(1, CART[index].qty + delta); saveCart(); }
+    function clearCart(){ CART=[]; saveCart(); }
+    function subtotal(){ return CART.reduce((s,i)=>s + i.price * i.qty, 0); }
+
+    /* Renderers */
+    function createCard(p){
+      const card = document.createElement('article'); card.className='product';
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.title}">
+        <div class="pinfo">
+          <div class="p-title">${p.title}</div>
+          <div class="p-price">USD ${p.price.toFixed(2)}</div>
+          <div class="p-actions">
+            <button class="btn btn-outline" data-view="${p.id}">Ver</button>
+            <button class="btn btn-primary" data-add="${p.id}">Agregar</button>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    function renderSection(){
+      gridRemeras.innerHTML=''; gridBuzos.innerHTML=''; gridPantalones.innerHTML='';
+      PRODUCTS.forEach(p=>{
+        if(p.category==='remeras') gridRemeras.appendChild(createCard(p));
+        if(p.category==='buzos') gridBuzos.appendChild(createCard(p));
+        if(p.category==='pantalones') gridPantalones.appendChild(createCard(p));
+      });
+    }
+
+    function renderCart(){
+      const totalCount = CART.reduce((s,i)=>s+i.qty,0);
+      cartCountEl.textContent = totalCount;
+      floatCount.textContent = totalCount;
+      cartSubtotalEl.textContent = 'USD ' + subtotal().toFixed(2);
+      cartItemsEl.innerHTML = '';
+      if(CART.length===0){ cartItemsEl.innerHTML = '<p class="muted">Tu carrito está vacío.</p>'; return; }
+      CART.forEach((it,idx)=>{
+        const el = document.createElement('div'); el.className='cart-item';
+        el.innerHTML = `
+          <img src="${it.img}" alt="${it.title}">
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between"><strong>${it.title}</strong><div class="muted">USD ${it.price.toFixed(2)}</div></div>
+            <div class="muted">Cantidad: ${it.qty}</div>
+            <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+              <div class="qty"><button data-decrease="${idx}" class="icon-btn">-</button><div style="padding:6px 10px">${it.qty}</div><button data-increase="${idx}" class="icon-btn">+</button></div>
+              <div><button data-remove="${idx}" class="icon-btn">Eliminar</button></div>
+            </div>
+          </div>
+        `;
+        cartItemsEl.appendChild(el);
+      });
+    }
+
+    /* Events */
+    renderSection(); renderCart();
+
+    // category filtering (scroll to section)
+    categories.forEach(c=>c.addEventListener('click', ()=>{
+      const cat = c.getAttribute('data-cat');
+      if(cat==='all'){ window.scrollTo({top:0, behavior:'smooth'}); return; }
+      const el = document.getElementById(cat);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }));
+
+    // search (filter in-place - hides non-matching cards)
+    searchBox.addEventListener('input', ()=>{
+      const q = searchBox.value.toLowerCase().trim();
+      const allCards = document.querySelectorAll('.product');
+      allCards.forEach(card=>{
+        const title = card.querySelector('.p-title').textContent.toLowerCase();
+        card.style.display = (title.includes(q) || q==='') ? '' : 'none';
+      });
+    });
+
+    // delegate add/view
+    document.body.addEventListener('click', (e)=>{
+      const add = e.target.getAttribute('data-add');
+      const view = e.target.getAttribute('data-view');
+      if(add){ addToCartById(+add); }
+      if(view){ const p = PRODUCTS.find(x=>x.id==+view); alert(p.title + '\\nPrecio: USD ' + p.price.toFixed(2)); }
+    });
+
+    // cart open/close
+    document.getElementById('cartCountBtn').addEventListener('click', openCartPanel);
+    document.getElementById('openCart').addEventListener('click', openCartPanel);
+    document.getElementById('closeCart').addEventListener('click', ()=>{ cartPanel.classList.remove('open'); cartPanel.setAttribute('aria-hidden','true'); });
+    function openCartPanel(){ cartPanel.classList.add('open'); cartPanel.setAttribute('aria-hidden','false'); }
+
+    // cart item controls
+    cartItemsEl.addEventListener('click', (e)=>{
+      const dec = e.target.getAttribute('data-decrease');
+      const inc = e.target.getAttribute('data-increase');
+      const rem = e.target.getAttribute('data-remove');
+      if(dec!==null) changeQty(+dec, -1);
+      if(inc!==null) changeQty(+inc, +1);
+      if(rem!==null) removeFromCart(+rem);
+    });
+
+    // clear & checkout
+    clearCartBtn.addEventListener('click', ()=>{ if(confirm('Vaciar carrito?')) clearCart(); });
+    checkoutBtn.addEventListener('click', ()=>{
+      if(CART.length===0){ alert('El carrito está vacío. Agrega productos.'); return; }
+      const total = subtotal();
+      if(confirm(`Simular pago — Total USD ${total.toFixed(2)}. Confirmar?`)){
+        alert('Pago simulado completado. Orden de ejemplo creada.');
+        clearCart();
+      }
+    });
+
+    // storage sync
+    window.addEventListener('storage', ()=>{ CART = JSON.parse(localStorage.getItem('ns_cart') || '[]'); renderCart(); });
+
+    // helpers to persist and re-render after cart changes
+    function saveCart(){ localStorage.setItem('ns_cart', JSON.stringify(CART)); renderCart(); }
+    function removeFromCart(index){ CART.splice(index,1); saveCart(); }
+    function changeQty(index, delta){ CART[index].qty = Math.max(1, CART[index].qty + delta); saveCart(); }
+    function clearCart(){ CART=[]; saveCart(); }
+    function subtotal(){ return CART.reduce((s,i)=>s + i.price * i.qty, 0); }
+  </script>
+</body>
+</html>
