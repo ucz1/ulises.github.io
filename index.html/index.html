@@ -1,0 +1,123 @@
+<!--
+Plantilla HTML mínima para GitHub Pages
+Instrucciones rápidas:
+1) Crear repo en GitHub llamado: tu-usuario.github.io
+2) Subir este archivo como index.html en la raíz del repo
+3) Personalizar: reemplazar texto, imágenes (mockups de Printful) y enlaces de compra (Printful/PayPal/Stripe)
+4) Activar GitHub Pages en Settings -> Pages (rama main/gh-pages).
+
+Aviso legal: No uses marcas registradas ni logos de terceros (Polo Sport, Nautica, etc.). Usa diseños originales inspirados en el estilo náutico / deportivo sin copiar marcas.
+-->
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tienda | Estilo Náutico & Deportivo</title>
+  <meta name="description" content="Tienda de ropa estilo náutico y deportivo - diseños originales">
+  <style>
+    :root{--bg:#f7f7f7;--card:#fff;--accent:#003366;--muted:#666}
+    body{font-family:Inter, system-ui, Arial, sans-serif;margin:0;background:var(--bg);color:#111}
+    .wrap{max-width:1000px;margin:30px auto;padding:0 16px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#0055a5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{font-size:20px;margin:0}
+    nav a{margin-left:12px;color:var(--muted);text-decoration:none;font-size:14px}
+    .hero{background:linear-gradient(90deg,rgba(0,51,102,0.05),transparent);padding:18px;border-radius:10px;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .mock{width:100%;height:220px;background:#eee;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;margin-bottom:10px}
+    .title{font-weight:700;margin:0 0 6px 0}
+    .price{color:var(--accent);font-weight:700}
+    .buy{display:inline-block;margin-top:8px;padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none}
+    footer{margin-top:26px;padding:18px 8px;color:var(--muted);font-size:14px}
+    @media (max-width:480px){.mock{height:180px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div>
+          <h1>Tienda Nautica Sport — Diseños Originales</h1>
+          <div style="font-size:13px;color:var(--muted)">Envíos por Printful / Printify — Sin stock físico</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#coleccion">Colección</a>
+        <a href="#about">Sobre</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <strong>Estética náutica y deportiva</strong> — Productos originales, bordados y estampados con look clásico: franjas, anclas, compases y tipografía limpia.
+    </section>
+
+    <section id="coleccion" class="grid">
+      <!-- Producto 1 -->
+      <article class="card">
+        <div class="mock">Mockup: Remera "Brisa Marina"</div>
+        <h3 class="title">Remera Brisa Marina</h3>
+        <div class="price">USD 24.90</div>
+        <p style="color:var(--muted);font-size:14px;margin:8px 0 0 0">Corte clásico, algodón ringspun. Estampa tipo bordado con ancla y franjas.</p>
+        <a class="buy" href="REEMPLAZAR_CON_LINK_DE_PAGO">Comprar</a>
+      </article>
+
+      <!-- Producto 2 -->
+      <article class="card">
+        <div class="mock">Mockup: Polo "Regata"</div>
+        <h3 class="title">Polo Regata</h3>
+        <div class="price">USD 29.90</div>
+        <p style="color:var(--muted);font-size:14px;margin:8px 0 0 0">Polo de piqué con detalle de rayas y parche bordado. Estética deportiva sin uso de marcas.</p>
+        <a class="buy" href="REEMPLAZAR_CON_LINK_DE_PAGO">Comprar</a>
+      </article>
+
+      <!-- Producto 3 -->
+      <article class="card">
+        <div class="mock">Mockup: Buzo "Compás"</div>
+        <h3 class="title">Buzo Compás</h3>
+        <div class="price">USD 39.90</div>
+        <p style="color:var(--muted);font-size:14px;margin:8px 0 0 0">Buzo con capucha, estampado frontal minimalista con compás y número de colección.</p>
+        <a class="buy" href="REEMPLAZAR_CON_LINK_DE_PAGO">Comprar</a>
+      </article>
+
+      <!-- Producto 4 -->
+      <article class="card">
+        <div class="mock">Mockup: Tote Bag "Norte"</div>
+        <h3 class="title">Tote Bag Norte</h3>
+        <div class="price">USD 14.90</div>
+        <p style="color:var(--muted);font-size:14px;margin:8px 0 0 0">Bolso de lona con diseño lineal inspirado en mapas náuticos.</p>
+        <a class="buy" href="REEMPLAZAR_CON_LINK_DE_PAGO">Comprar</a>
+      </article>
+
+      <!-- Producto 5 -->
+      <article class="card">
+        <div class="mock">Mockup: Gorra "Puerto"</div>
+        <h3 class="title">Gorra Puerto</h3>
+        <div class="price">USD 12.90</div>
+        <p style="color:var(--muted);font-size:14px;margin:8px 0 0 0">Gorra de 5 paneles con logo tipográfico propio y detalle contrastante.</p>
+        <a class="buy" href="REEMPLAZAR_CON_LINK_DE_PAGO">Comprar</a>
+      </article>
+
+    </section>
+
+    <section id="about" style="margin-top:18px">
+      <h2 style="font-size:16px;margin:0 0 8px 0">Cómo funciona</h2>
+      <ol style="color:var(--muted)">
+        <li>El cliente compra desde esta web (link hacia Printful/PayPal/Stripe).</li>
+        <li>Vos realizás el pedido en Printful con la dirección del cliente.</li>
+        <li>Printful fabrica y envía directamente al cliente. Vos cobrás la diferencia.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <div>Consejo legal: mantén diseños originales, evita uso de nombres o logos registrados.</div>
+      <div style="margin-top:8px">¿Querés que arme los mockups y los enlaces listos para pegar? Decime y te los preparo.</div>
+    </footer>
+
+  </div>
+</body>
+</html>
